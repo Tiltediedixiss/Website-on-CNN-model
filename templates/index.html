@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classifier AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Classifier AI</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="button-group">
+                <label for="file-upload" class="custom-file-upload" id="file-label">Choose File</label>
+                <input id="file-upload" type="file" name="file" accept="image/*" required hidden>
+                <button type="submit">Upload & Classify</button>
+            </div>                      
+        </form>
+        
+
+        {% if uploaded_image %}
+            <div class="result">
+                <h2>Uploaded Image:</h2>
+                <img src="{{ uploaded_image }}" alt="Uploaded Image">
+                <h2>Prediction: <span class="prediction">{{ prediction }}</span></h2>
+            </div>
+        {% endif %}
+    </div>
+    <script>
+        document.getElementById("file-upload").addEventListener("change", function () {
+            let fileLabel = document.getElementById("file-label");
+            if (this.files.length > 0) {
+                fileLabel.textContent = this.files[0].name; // Show selected file name
+            } else {
+                fileLabel.textContent = "Choose File"; // Reset if no file is chosen
+            }
+        });
+    </script>
+</body>
+</html>
